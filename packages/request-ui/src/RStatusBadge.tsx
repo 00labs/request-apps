@@ -25,7 +25,7 @@ export const statusLabels: Record<RequestStatus, string> = {
   canceled: 'Canceled',
   overpaid: 'Overpaid',
   unknown: 'Unknown',
-  receivablePending: 'Awaiting Receivable Mint',
+  receivablePending: 'Awaiting Request Mint',
   receivableUnknown: 'Switch Networks to See Status',
 };
 

@@ -16,8 +16,10 @@ export const getRequestClient = (
   signatureProvider?: Types.SignatureProvider.ISignatureProvider,
   currencyList?: CurrencyDefinition[]
 ) => {
+  // Mapped from chainIdToName.ts
   const networkMap = {
-    matic: "goerli",
+    mainnet: "xdai",
+    matic: "xdai",
     goerli: "goerli",
   };
   const networkName = networkMap[network] ?? network;

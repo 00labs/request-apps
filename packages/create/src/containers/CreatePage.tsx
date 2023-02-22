@@ -2,7 +2,6 @@ import { FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import {
-  addEthereumChain,
   chainInfos,
   isCancelError,
   useCreateRequest,
