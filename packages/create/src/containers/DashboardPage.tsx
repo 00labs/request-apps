@@ -24,7 +24,7 @@ import { useConnectedUser } from "../contexts/UserContext";
 import NotLoggedPage from "./NotLoggedPage";
 import Dot from "../components/Dot";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "white",
     width: "100%",
@@ -132,6 +132,16 @@ export const Dashboard = () => {
 };
 
 const DashboardPage = () => {
+  const { chainId, account } = useWeb3React();
+  const { loading: web3Loading } = useConnectedUser();
+
+  if (web3Loading) {
+    return null;
+  }
+  if (!web3Loading && (!account || !chainId)) {
+    return <NotLoggedPage />;
+  }
+
   return (
     <RequestListProvider>
       <Dashboard />

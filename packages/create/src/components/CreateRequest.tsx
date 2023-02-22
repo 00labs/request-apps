@@ -159,7 +159,7 @@ const Amount = ({ className }: { className?: string }) => {
     <TextField
       {...field}
       name="amount"
-      label="Amount (Maximum 100)"
+      label="Amount (Maximum 1000)"
       className={className}
       type="number"
       fullWidth
@@ -337,7 +337,7 @@ const Footer = ({
 export const schema = Yup.object().shape<IFormData>({
   amount: Yup.number()
     .positive("Please enter a positive number")
-    .max(100, "Please limit to 100 for testing purpose")
+    .max(1000, "Requests are limited to 1000")
     .typeError("Please enter a number")
     .required("Required"),
   payer: Yup.string()

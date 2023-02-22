@@ -4,7 +4,7 @@ import { IRequestData } from "@requestnetwork/types/dist/client-types";
 
 export const fetchReceivableMinted = async (
   request: IRequestData,
-  provider: providers.Web3Provider
+  provider: providers.Provider
 ): Promise<boolean> => {
   const win = window as any;
 

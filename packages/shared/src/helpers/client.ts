@@ -11,19 +11,30 @@ export const useRequestClient = (
   return getRequestClient(network, signatureProvider, currencyList);
 };
 
+const getBaseUrl = (networkName) => {
+  if (networkName === "goerli") {
+    return `https://${networkName}.v2.rn.huma.finance/`;
+  }
+  return `https://${networkName}.gateway.request.network/`;
+};
+
 export const getRequestClient = (
   network: string,
   signatureProvider?: Types.SignatureProvider.ISignatureProvider,
   currencyList?: CurrencyDefinition[]
 ) => {
+  // Mapped from chainIdToName.ts
   const networkMap = {
+    mainnet: "xdai",
     matic: "xdai",
+    goerli: "goerli",
   };
   const networkName = networkMap[network] ?? network;
   const requestNetwork = new RequestNetwork({
     nodeConnectionConfig: {
-      baseURL: `https://${networkName}.gateway.request.network/`,
-      // baseURL: `https://${networkName}.rn.huma.finance/`,
+      baseURL: getBaseUrl(networkName),
+      // baseURL: `https://${networkName}.gateway.request.network/`,
+      // baseURL: `https://${networkName}.v2.rn.huma.finance/`,
       // baseURL: `http://localhost:3000`,
     },
     signatureProvider,
