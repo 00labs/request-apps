@@ -26,6 +26,7 @@ export const statusLabels: Record<RequestStatus, string> = {
   overpaid: 'Overpaid',
   unknown: 'Unknown',
   receivablePending: 'Awaiting Receivable Mint',
+  receivableUnknown: 'Switch Networks to See Status',
 };
 
 export const RStatusBadge = (props: IProps) => {

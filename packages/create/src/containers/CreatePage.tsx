@@ -1,7 +1,13 @@
 import { FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { isCancelError, useCreateRequest } from "request-shared";
+import {
+  addEthereumChain,
+  chainInfos,
+  isCancelError,
+  useCreateRequest,
+  useCurrency,
+} from "request-shared";
 import { useErrorReporter } from "request-ui";
 
 import { useWeb3React } from "@web3-react/core";
@@ -19,6 +25,7 @@ const CreatePage = () => {
   const { loading: web3Loading, name } = useConnectedUser();
   const { report } = useErrorReporter();
   const createRequest = useCreateRequest();
+  const { currencyManager } = useCurrency();
 
   const submit = async (
     values: IFormData,
@@ -79,9 +86,21 @@ const CreatePage = () => {
         ExtensionTypes.PAYMENT_NETWORK_ID.ERC20_TRANSFERABLE_RECEIVABLE
       ) {
         await request.waitForConfirmation();
-        const mintTx = await mintErc20TransferableReceivable(data, library);
-        await mintTx.wait(1);
-        history.push(`/${request.requestId}`);
+
+        const currency = currencyManager.fromId(values.currency);
+
+        if (!currency) {
+          throw new Error("currency not loaded from manager");
+        }
+
+        if ("network" in currency) {
+          const chainIdOfCurrency = chainInfos[currency?.network]?.chainId;
+          if (chainId === chainIdOfCurrency) {
+            const mintTx = await mintErc20TransferableReceivable(data, library);
+            await mintTx.wait(1);
+          }
+          history.push(`/${request.requestId}`);
+        }
       } else {
         history.push(`/${request.requestId}`);
       }

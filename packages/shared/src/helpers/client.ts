@@ -17,13 +17,13 @@ export const getRequestClient = (
   currencyList?: CurrencyDefinition[]
 ) => {
   const networkMap = {
-    matic: "polygon",
-    goerli: "goerli.v2",
+    matic: "goerli",
+    goerli: "goerli",
   };
   const networkName = networkMap[network] ?? network;
   const requestNetwork = new RequestNetwork({
     nodeConnectionConfig: {
-      baseURL: `https://goerli.gateway.request.network/`,
+      baseURL: `https://${networkName}.gateway.request.network/`,
       // baseURL: `https://${networkName}.rn.huma.finance/`,
       // baseURL: `http://localhost:3000`,
     },
