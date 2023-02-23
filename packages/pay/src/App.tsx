@@ -11,7 +11,7 @@ import PaymentPage from "./containers/PaymentPage";
 //@ts-ignore
 import { ReceiptPreview } from "request-ui";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     flexDirection: "column",

@@ -3,9 +3,11 @@ import { makeStyles, Theme, Box, Typography } from '@material-ui/core';
 
 import { colors, statusColors } from './colors';
 import { RequestStatus } from 'request-shared';
+import { CurrencyDefinition } from '@requestnetwork/currency';
 
 interface IProps {
   status: RequestStatus;
+  currency?: CurrencyDefinition;
   className?: string;
 }
 
@@ -32,6 +34,15 @@ export const statusLabels: Record<RequestStatus, string> = {
 export const RStatusBadge = (props: IProps) => {
   const classes = useStyles(props);
 
+  let statusLabel = statusLabels[props.status];
+  if (
+    props.status === 'receivableUnknown' &&
+    props.currency &&
+    'network' in props.currency
+  ) {
+    statusLabel = `Switch to ${props.currency.network} to See Status`;
+  }
+
   return (
     <Box
       display="flex"
@@ -47,7 +58,7 @@ export const RStatusBadge = (props: IProps) => {
             : ''
         }
       >
-        <Typography variant="h6">{statusLabels[props.status]}</Typography>
+        <Typography variant="h6">{statusLabel}</Typography>
       </div>
     </Box>
   );

@@ -13,7 +13,7 @@ import { colors } from './colors';
 import { Spacer } from './Spacer';
 import { RStatusBadge } from './RStatusBadge';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -165,7 +165,7 @@ export const RequestView = ({
           </Typography>
         </Box>
         <Spacer size={4} />
-        <RStatusBadge status={status} />
+        <RStatusBadge status={status} currency={currency} />
         <Spacer size={3} />
         <Typography variant="h3">
           {amount} {currency.symbol}

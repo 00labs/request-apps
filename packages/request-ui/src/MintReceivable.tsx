@@ -40,7 +40,7 @@ export const MintReceivable = (props: IProps) => {
       <>
         <RAlert
           severity="error"
-          message={"Please switch networks to see this request's status"}
+          message={'You must mint the receivable in order to receive payments.'}
           actions={
             isPayee ? (
               <RButton

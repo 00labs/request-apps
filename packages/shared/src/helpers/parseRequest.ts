@@ -1,4 +1,4 @@
-import { utils, BigNumber, providers } from "ethers";
+import { utils, BigNumber, providers, ethers } from "ethers";
 
 import { Types } from "@requestnetwork/request-client.js";
 import { ICurrencyManager } from "@requestnetwork/currency";
@@ -64,15 +64,23 @@ export const parseRequest = async ({
   let receivableStatusRequiresChainSwitch = false;
   if (
     paymentNetwork ===
-      ExtensionTypes.PAYMENT_NETWORK_ID.ERC20_TRANSFERABLE_RECEIVABLE &&
-    provider
+    ExtensionTypes.PAYMENT_NETWORK_ID.ERC20_TRANSFERABLE_RECEIVABLE
   ) {
     let currencyChainId =
       "network" in currency ? chainInfos[currency.network].chainId : null;
-    console.log(currencyChainId);
-    console.log(provider);
-    if (currencyChainId && currencyChainId === provider.network.chainId) {
+    if (
+      currencyChainId &&
+      provider &&
+      currencyChainId === provider.network.chainId
+    ) {
       receivableMinted = await fetchReceivableMinted(data, provider);
+    } else if (currencyChainId === 137) {
+      // Temp fix for polygon
+      const networkProvider = await ethers.providers.getDefaultProvider(
+        currencyChainId,
+        { alchemy: "7sBhlIVEpfCG9R-XOzBFiU1O-dMXMLDC" }
+      );
+      receivableMinted = await fetchReceivableMinted(data, networkProvider);
     } else {
       receivableStatusRequiresChainSwitch = true;
     }
