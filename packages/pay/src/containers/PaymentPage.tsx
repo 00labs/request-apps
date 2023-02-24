@@ -94,7 +94,8 @@ export const ErrorContainer = () => {
   return (
     <Box className={classes.container}>
       {(request?.status === "open" ||
-        request?.status === "receivablePending") &&
+        request?.status === "receivablePending" ||
+        request?.status === "receivableUnknown") &&
         error &&
         showErrorAtTop && <ErrorMessage error={error} request={request} />}
       <RContainer>

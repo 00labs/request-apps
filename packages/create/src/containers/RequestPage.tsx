@@ -114,9 +114,10 @@ const RequestPageInner = () => {
     <RContainer>
       <Spacer size={15} xs={8} />
       <TestnetWarning chainId={request?.network} />
-      {request.status === "receivablePending" && (
+      {request.status === "receivablePending" ||
+      request.status === "receivableUnknown" ? (
         <MintReceivable request={request} />
-      )}
+      ) : null}
       <RequestView
         payee={request.payee}
         createdDate={request.createdDate}

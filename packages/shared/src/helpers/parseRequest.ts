@@ -1,9 +1,9 @@
-import { utils, BigNumber, providers } from "ethers";
+import { utils, BigNumber, providers, ethers } from "ethers";
 
 import { Types } from "@requestnetwork/request-client.js";
 import { ICurrencyManager } from "@requestnetwork/currency";
 
-import { fetchReceivableMinted, IParsedRequest } from "../";
+import { chainInfos, fetchReceivableMinted, IParsedRequest } from "../";
 import { ExtensionTypes } from "@requestnetwork/types";
 
 const getStatus = (
@@ -11,7 +11,8 @@ const getStatus = (
   expectedAmount: BigNumber,
   balance: BigNumber | undefined,
   pending: boolean,
-  receivableMinted?: boolean
+  receivableMinted?: boolean,
+  receivableStatusRequiresChainSwitch?: boolean
 ) => {
   if (!balance) return "unknown";
   if (state === Types.RequestLogic.STATE.CANCELED) return "canceled";
@@ -20,6 +21,7 @@ const getStatus = (
   if (balance?.gt(expectedAmount)) return "overpaid";
   if (pending) return "pending";
   if (receivableMinted === false) return "receivablePending";
+  if (receivableStatusRequiresChainSwitch) return "receivableUnknown";
   return "open";
 };
 
@@ -37,7 +39,7 @@ export const parseRequest = async ({
   network: string;
   pending: boolean;
   currencyManager: ICurrencyManager;
-  provider?: providers.Web3Provider;
+  provider: providers.Web3Provider;
 }): Promise<IParsedRequest> => {
   const currency = currencyManager.fromStorageCurrency(data.currencyInfo);
   if (!currency) {
@@ -59,12 +61,35 @@ export const parseRequest = async ({
   )?.id;
 
   let receivableMinted;
+  let receivableStatusRequiresChainSwitch = false;
   if (
     paymentNetwork ===
-      ExtensionTypes.PAYMENT_NETWORK_ID.ERC20_TRANSFERABLE_RECEIVABLE &&
-    provider
+    ExtensionTypes.PAYMENT_NETWORK_ID.ERC20_TRANSFERABLE_RECEIVABLE
   ) {
-    receivableMinted = await fetchReceivableMinted(data, provider);
+    let currencyChainId =
+      "network" in currency ? chainInfos[currency.network].chainId : null;
+    if (
+      currencyChainId &&
+      provider &&
+      currencyChainId === provider.network.chainId
+    ) {
+      receivableMinted = await fetchReceivableMinted(data, provider);
+    } else if (currencyChainId === 137) {
+      // Temp fix for polygon
+      const networkProvider = await ethers.providers.getDefaultProvider(
+        currencyChainId,
+        { alchemy: "7sBhlIVEpfCG9R-XOzBFiU1O-dMXMLDC" }
+      );
+      receivableMinted = await fetchReceivableMinted(data, networkProvider);
+    } else if (currencyChainId === 5) {
+      // Temp fix for goerli
+      const networkProvider = await ethers.providers.getDefaultProvider(
+        currencyChainId
+      );
+      receivableMinted = await fetchReceivableMinted(data, networkProvider);
+    } else {
+      receivableStatusRequiresChainSwitch = true;
+    }
   }
 
   const status = getStatus(
@@ -72,7 +97,8 @@ export const parseRequest = async ({
     BigNumber.from(data.expectedAmount),
     data.balance?.balance ? BigNumber.from(data.balance.balance) : undefined,
     pending,
-    receivableMinted
+    receivableMinted,
+    receivableStatusRequiresChainSwitch
   );
 
   const paidTimestamp = data.balance?.events.reverse()[0]?.timestamp;

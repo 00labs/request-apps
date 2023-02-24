@@ -117,7 +117,7 @@ const Amount = ({
   );
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   row: {
     display: "flex",
     flexDirection: "row",
@@ -237,7 +237,10 @@ const Row = React.memo(
           </Box>
           <Box flex={2 / 10} className={classes.status}>
             {request.loaded ? (
-              <RStatusBadge status={request.status} />
+              <RStatusBadge
+                status={request.status}
+                currency={request.currency}
+              />
             ) : (
               <Skeleton
                 animation="wave"
@@ -350,7 +353,7 @@ export const RequestList = ({
           <SkeletonRow />
         </>
       ) : requests.length > 0 ? (
-        requests.map(request => (
+        requests.map((request) => (
           <Row key={request.requestId} request={request} account={account} />
         ))
       ) : (

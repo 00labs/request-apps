@@ -12,7 +12,8 @@ export type RequestStatus =
   | "canceled"
   | "overpaid"
   | "unknown"
-  | "receivablePending";
+  | "receivablePending"
+  | "receivableUnknown";
 
 /** Formatted request */
 export interface IParsedRequest {
@@ -110,7 +111,7 @@ export const addEthereumChain = (
   const { chainId, name, blockExplorerUrls, rpcUrls, nativeCurrency } =
     chainInfos[chain] || {};
   if (!library) {
-    library = new providers.Web3Provider((window as any).ethereum);
+    library = new providers.Web3Provider((window as any).ethereum, "any");
   }
 
   // first attempt to switch to that chain
