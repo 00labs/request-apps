@@ -81,6 +81,12 @@ export const parseRequest = async ({
         { alchemy: "7sBhlIVEpfCG9R-XOzBFiU1O-dMXMLDC" }
       );
       receivableMinted = await fetchReceivableMinted(data, networkProvider);
+    } else if (currencyChainId === 5) {
+      // Temp fix for goerli
+      const networkProvider = await ethers.providers.getDefaultProvider(
+        currencyChainId
+      );
+      receivableMinted = await fetchReceivableMinted(data, networkProvider);
     } else {
       receivableStatusRequiresChainSwitch = true;
     }
