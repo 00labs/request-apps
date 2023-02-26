@@ -1,5 +1,5 @@
 import { chainIdToName } from "./chainIdToName";
-import { IdentityTypes } from "@requestnetwork/types";
+import { IdentityTypes } from "@frinkly/types";
 import { providers } from "ethers";
 
 import { CustomSignatureProvider } from "./CustomSignatureProvider";
@@ -19,7 +19,7 @@ export const cancelRequest = async (
     new providers.Web3Provider((window as any).ethereum).getSigner()
   );
   if (!win.ethereum.isMetamask) {
-    const { Web3SignatureProvider } = require("@requestnetwork/web3-signature");
+    const { Web3SignatureProvider } = require("@frinkly/web3-signature");
     signatureProvider = new Web3SignatureProvider(win.ethereum);
   }
   const rn = getRequestClient(network, signatureProvider);

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 
-import { Request } from "@requestnetwork/request-client.js";
-import { CurrencyDefinition } from "@requestnetwork/currency";
+import { Request } from "@frinkly/request-client.js";
+import { CurrencyDefinition } from "@frinkly/currency";
 
 import { useRate } from "../hooks/useRate";
 import { parseRequest } from "../helpers/parseRequest";

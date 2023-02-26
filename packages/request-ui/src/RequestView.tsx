@@ -7,7 +7,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import { Skeleton } from '@material-ui/lab';
 
 import { RequestStatus, useEnsName } from 'request-shared';
-import { CurrencyDefinition } from '@requestnetwork/currency';
+import { CurrencyDefinition } from '@frinkly/currency';
 
 import { colors } from './colors';
 import { Spacer } from './Spacer';

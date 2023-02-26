@@ -8,10 +8,10 @@ import {
   useRequest,
 } from 'request-shared';
 import { RAlert } from './RAlert';
-import { mintErc20TransferableReceivable } from '@requestnetwork/payment-processor';
+import { mintErc20TransferableReceivable } from '@frinkly/payment-processor';
 import { Typography } from '@material-ui/core';
 import { Spacer } from './Spacer';
-import { ExtensionTypes } from '@requestnetwork/types';
+import { ExtensionTypes } from '@frinkly/types';
 
 interface IProps {
   request: IParsedRequest;

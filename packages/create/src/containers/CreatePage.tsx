@@ -14,8 +14,8 @@ import { useWeb3React } from "@web3-react/core";
 import { CreateRequestForm, IFormData } from "../components/CreateRequest";
 import { useConnectedUser } from "../contexts/UserContext";
 import { ethers } from "ethers";
-import { ExtensionTypes } from "@requestnetwork/types";
-import { mintErc20TransferableReceivable } from "@requestnetwork/payment-processor";
+import { ExtensionTypes } from "@frinkly/types";
+import { mintErc20TransferableReceivable } from "@frinkly/payment-processor";
 
 const CreatePage = () => {
   const history = useHistory();
@@ -84,6 +84,7 @@ const CreatePage = () => {
         paymentNetwork ===
         ExtensionTypes.PAYMENT_NETWORK_ID.ERC20_TRANSFERABLE_RECEIVABLE
       ) {
+        console.log("wait for confirmation");
         await request.waitForConfirmation();
 
         const currency = currencyManager.fromId(values.currency);

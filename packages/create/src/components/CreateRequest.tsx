@@ -13,7 +13,7 @@ import {
 import Moment from "react-moment";
 import * as Yup from "yup";
 import { Skeleton } from "@material-ui/lab";
-import { CurrencyManager } from "@requestnetwork/currency";
+import { CurrencyManager } from "@frinkly/currency";
 import { isValidEns, ENS, isSimpleAscii, useCurrency } from "request-shared";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";

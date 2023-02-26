@@ -1,14 +1,10 @@
-import {
-  normalize,
-  areEqualIdentities,
-  recoverSigner,
-} from "@requestnetwork/utils";
+import { normalize, areEqualIdentities, recoverSigner } from "@frinkly/utils";
 import { providers } from "ethers";
 import {
   IdentityTypes,
   SignatureProviderTypes,
   SignatureTypes,
-} from "@requestnetwork/types";
+} from "@frinkly/types";
 
 export class CustomSignatureProvider
   implements SignatureProviderTypes.ISignatureProvider
