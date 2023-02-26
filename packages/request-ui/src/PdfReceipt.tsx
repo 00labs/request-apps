@@ -19,7 +19,7 @@ import {
   useRequest,
   getEtherscanUrl,
 } from 'request-shared';
-import { CurrencyDefinition } from '@requestnetwork/currency';
+import { CurrencyDefinition } from '@frinkly/currency';
 
 import { RButton } from './RButton';
 import { statusLabels } from './RStatusBadge';

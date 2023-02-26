@@ -1,7 +1,7 @@
-import { Request } from "@requestnetwork/request-client.js";
-import { IdentityTypes, RequestLogicTypes } from "@requestnetwork/types";
-import { PAYMENT_NETWORK_ID } from "@requestnetwork/types/dist/extension-types";
-import { CurrencyManager } from "@requestnetwork/currency";
+import { Request } from "@frinkly/request-client.js";
+import { IdentityTypes, RequestLogicTypes } from "@frinkly/types";
+import { PAYMENT_NETWORK_ID } from "@frinkly/types/dist/extension-types";
+import { CurrencyManager } from "@frinkly/currency";
 import { getDefaultProvider, providers, utils, constants } from "ethers";
 import WalletAddressValidator from "wallet-address-validator";
 
@@ -45,9 +45,7 @@ export const useCreateRequest = () => {
       new providers.Web3Provider((window as any).ethereum).getSigner()
     );
     if (!win.ethereum.isMetamask) {
-      const {
-        Web3SignatureProvider,
-      } = require("@requestnetwork/web3-signature");
+      const { Web3SignatureProvider } = require("@frinkly/web3-signature");
       signatureProvider = new Web3SignatureProvider(win.ethereum);
     }
     const requestNetwork = getRequestClient(

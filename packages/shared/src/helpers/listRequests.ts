@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { Request } from "@requestnetwork/request-client.js";
-import { IdentityTypes } from "@requestnetwork/types";
+import { Request } from "@frinkly/request-client.js";
+import { IdentityTypes } from "@frinkly/types";
 import { EventEmitter } from "events";
 import { parseRequest } from "./parseRequest";
 import { chainIdToName } from "./chainIdToName";
 import { IParsedRequest } from "../";
-import { ICurrencyManager } from "@requestnetwork/currency";
+import { ICurrencyManager } from "@frinkly/currency";
 import { useCurrency } from "../contexts/CurrencyContext";
 import { getRequestClient } from "./client";
 import { useWeb3React } from "@web3-react/core";

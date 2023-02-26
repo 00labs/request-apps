@@ -26,8 +26,8 @@ import {
 import { UnsupportedChainIdError, getWeb3ReactContext } from "@web3-react/core";
 import { NoEthereumProviderError } from "@web3-react/injected-connector";
 import { RequestContext, RequestStatus, IParsedRequest } from "request-shared";
-import { Types } from "@requestnetwork/request-client.js";
-import { CurrencyManager, CurrencyDefinition } from "@requestnetwork/currency";
+import { Types } from "@frinkly/request-client.js";
+import { CurrencyManager, CurrencyDefinition } from "@frinkly/currency";
 import { ConnectorContext } from "../contexts/ConnectorContext";
 import {
   PaymentContext,
