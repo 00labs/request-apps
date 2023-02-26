@@ -1,4 +1,4 @@
-import { CurrencyDefinition } from "@requestnetwork/currency";
+import { CurrencyDefinition } from "@frinkly/currency";
 import { useState, useEffect } from "react";
 
 /** Load rate conversion between two currencies */
@@ -13,8 +13,8 @@ export const useRate = (
       fetch(
         `https://min-api.cryptocompare.com/data/price?fsym=${curr}&tsyms=${counterCurrency}`
       )
-        .then(res => res.json())
-        .then(res => {
+        .then((res) => res.json())
+        .then((res) => {
           setRate(res[counterCurrency.symbol]);
         });
     }

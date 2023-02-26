@@ -15,7 +15,7 @@ import { RStatusBadge, Spacer, CopyIcon } from "request-ui";
 import Moment from "react-moment";
 import { Skeleton } from "@material-ui/lab";
 import { useClipboard } from "use-clipboard-copy";
-import { CurrencyDefinition } from "@requestnetwork/currency";
+import { CurrencyDefinition } from "@frinkly/currency";
 
 const short = (val?: string) =>
   val

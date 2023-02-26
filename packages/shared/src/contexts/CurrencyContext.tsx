@@ -3,7 +3,7 @@ import {
   CurrencyDefinition,
   CurrencyInput,
   CurrencyManager,
-} from "@requestnetwork/currency";
+} from "@frinkly/currency";
 
 interface IContext {
   currencyList: CurrencyDefinition[];

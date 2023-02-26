@@ -1,10 +1,10 @@
 import { utils, BigNumber, providers, ethers } from "ethers";
 
-import { Types } from "@requestnetwork/request-client.js";
-import { ICurrencyManager } from "@requestnetwork/currency";
+import { Types } from "@frinkly/request-client.js";
+import { ICurrencyManager } from "@frinkly/currency";
 
 import { chainInfos, fetchReceivableMinted, IParsedRequest } from "../";
-import { ExtensionTypes } from "@requestnetwork/types";
+import { ExtensionTypes } from "@frinkly/types";
 
 const getStatus = (
   state: Types.RequestLogic.STATE,

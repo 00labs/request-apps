@@ -3,7 +3,7 @@ import { makeStyles, Theme, Box, Typography } from '@material-ui/core';
 
 import { colors, statusColors } from './colors';
 import { RequestStatus } from 'request-shared';
-import { CurrencyDefinition } from '@requestnetwork/currency';
+import { CurrencyDefinition } from '@frinkly/currency';
 
 interface IProps {
   status: RequestStatus;
