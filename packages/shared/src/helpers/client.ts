@@ -12,9 +12,9 @@ export const useRequestClient = (
 };
 
 const getBaseUrl = (networkName) => {
-  if (networkName === "goerli") {
-    return `https://${networkName}.v2.rn.huma.finance/`;
-  }
+  // if (networkName === "goerli") {
+  //   return `https://${networkName}.v2.rn.huma.finance/`;
+  // }
   return `https://${networkName}.gateway.request.network/`;
 };
 
